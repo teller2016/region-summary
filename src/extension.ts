@@ -14,15 +14,34 @@ export function activate(context: vscode.ExtensionContext) {
    * package.json에 id값 정의되어야 됨
    */
   let disposable = vscode.commands.registerCommand(
-    "region-summary.helloWorld",
+    "region-index",
     regionSummary
   );
 
   context.subscriptions.push(disposable);
+
+  vscode.window.onDidChangeActiveTextEditor((editor) => {
+    if (editor) {
+      // Run the command when a file is focused
+      vscode.commands.executeCommand("region-index");
+    }
+  });
 }
 
 const regionSummary = () => {
-  vscode.window.showInformationMessage("REGION SUMMARY 실행");
+  const editor = vscode.window.activeTextEditor;
+  if (editor) {
+    // get the text document associated with the active editor
+    const document = editor.document;
+
+    // focus된 파일 text get
+    const text = document.getText();
+
+    // display the contents in the output window
+    console.log(text);
+  } else {
+    vscode.window.showErrorMessage("No active editor found");
+  }
 };
 
 /**

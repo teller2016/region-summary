@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "region-summary.helloWorld",
-        "title": "Hello World"
+        "command": "region-index",
+        "title": "Region Index"
       }
     ],
     "views": {
