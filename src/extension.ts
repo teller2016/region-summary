@@ -1,26 +1,31 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+/**
+ * 확장 프로그램 실행시 실행됨
+ * @param context
+ */
 export function activate(context: vscode.ExtensionContext) {
+  console.log(
+    'Congratulations, your extension "region-summary" is now active!'
+  );
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "region-summary" is now active!');
+  /**
+   * 확장기능 실행시 함수 실행
+   * package.json에 id값 정의되어야 됨
+   */
+  let disposable = vscode.commands.registerCommand(
+    "region-summary.helloWorld",
+    regionSummary
+  );
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('region-summary.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from region-summary!');
-	});
-
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
+const regionSummary = () => {
+  vscode.window.showInformationMessage("REGION SUMMARY 실행");
+};
+
+/**
+ * 확장기능 종료시 실행
+ */
 export function deactivate() {}
